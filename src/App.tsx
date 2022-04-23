@@ -4,6 +4,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { darkTheme, lightTheme } from './theme';
 import { isDarkAtom } from './atoms';
 import { useRecoilValue } from 'recoil';
+import FootToggle from './nav/FootToggle';
+import Header from './nav/Header';
 
 // react 쓸데없는 padding이랑 margin 제거
 const GlobalStyle = createGlobalStyle`
@@ -67,6 +69,24 @@ a {
   text-decoration:none;
   color:inherit;
 }
+.pc {
+  display: block;
+}
+.m {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .pc {
+    display: none;
+  }
+  .m {
+    display: block;
+  }
+  .m_w100 {
+    width: 100%;
+  }
+}
 `;
 
 // useRecoilValue를 사용해서 recoil의 값 (state) 불러오기
@@ -76,9 +96,11 @@ function App() {
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        {/* <Header /> */}
         <GlobalStyle />
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
+        <FootToggle />
       </ThemeProvider>
     </>
   );
